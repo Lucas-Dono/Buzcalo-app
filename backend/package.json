@@ -13,7 +13,12 @@
     "prisma:seed": "ts-node prisma/seed.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": ["buzcalo", "marketplace", "local", "api"],
+  "keywords": [
+    "buzcalo",
+    "marketplace",
+    "local",
+    "api"
+  ],
   "author": "BuZCalo Team",
   "license": "ISC",
   "dependencies": {
@@ -31,6 +36,7 @@
     "node-cron": "^4.2.1",
     "nodemailer": "^7.0.10",
     "redis": "^5.9.0",
+    "sharp": "^0.34.4",
     "winston": "^3.18.3"
   },
   "devDependencies": {

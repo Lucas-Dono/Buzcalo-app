@@ -2,6 +2,7 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
+import path from 'path';
 import { config } from './config/env';
 import { errorHandler, notFound } from './middleware/errorHandler.middleware';
 import { globalRateLimit } from './middleware/rateLimit.middleware';
@@ -43,8 +44,14 @@ if (config.env === 'development') {
 // Rate limiting
 app.use(globalRateLimit);
 
+// Serve static files (uploads)
+app.use('/uploads', express.static(path.join(__dirname, '../uploads'), {
+  maxAge: '1y', // Cache for 1 year
+  immutable: true,
+}));
+
 // Health check
-app.get('/health', (req, res) => {
+app.get('/health', (_req, res) => {
   res.status(200).json({
     status: 'ok',
     timestamp: new Date().toISOString(),

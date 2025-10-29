@@ -9,7 +9,7 @@ export interface CityFilterRequest extends AuthRequest {
 
 export const cityFilter = (
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ): void => {
   const authReq = req as CityFilterRequest;

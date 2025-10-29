@@ -4,7 +4,6 @@ import { prisma } from '../config/database';
 import {
   BadRequestError,
   NotFoundError,
-  ForbiddenError,
 } from '../utils/errors';
 import { logger } from '../utils/logger';
 
@@ -289,7 +288,7 @@ export const getSubscriptionHistory = async (
 export const mercadoPagoWebhook = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  _next: NextFunction
 ): Promise<void> => {
   try {
     const { type, data } = req.body;

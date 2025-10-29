@@ -4,9 +4,13 @@ import logger from './utils/logger';
 import { connectRedis } from './config/redis';
 import prisma from './config/database';
 import { startAllJobs } from './jobs/storyExpiration.job';
+import { initializeUploadDirectories } from './middleware/upload.middleware';
 
 const startServer = async (): Promise<void> => {
   try {
+    // Initialize upload directories
+    await initializeUploadDirectories();
+
     // Connect to Redis
     await connectRedis();
     logger.info('Redis connected successfully');

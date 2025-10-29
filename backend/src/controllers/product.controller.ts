@@ -222,7 +222,7 @@ export const getProductById = async (
     // Calculate average rating
     const avgRating =
       product.reviews.length > 0
-        ? product.reviews.reduce((sum, r) => sum + r.rating, 0) /
+        ? product.reviews.reduce((sum: number, r: { rating: number }) => sum + r.rating, 0) /
           product.reviews.length
         : 0;
 
@@ -232,7 +232,7 @@ export const getProductById = async (
         where: { id },
         data: { viewCount: { increment: 1 } },
       })
-      .catch((err) => logger.error('Failed to increment view count', err));
+      .catch((err: any) => logger.error('Failed to increment view count', err));
 
     res.json({
       success: true,

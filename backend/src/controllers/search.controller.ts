@@ -232,17 +232,17 @@ export const searchSuggestions = async (
     ]);
 
     const suggestions = [
-      ...businessNames.map((b) => ({
+      ...businessNames.map((b: any) => ({
         text: b.name,
         type: 'business',
         category: b.category,
       })),
-      ...productNames.map((p) => ({
+      ...productNames.map((p: any) => ({
         text: p.name,
         type: 'product',
         category: p.category,
       })),
-      ...serviceNames.map((s) => ({
+      ...serviceNames.map((s: any) => ({
         text: s.name,
         type: 'service',
         category: s.category,
@@ -315,12 +315,12 @@ export const getPopularSearches = async (
     ]);
 
     const popularSearches = [
-      ...productCategories.map((c) => ({
+      ...productCategories.map((c: any) => ({
         term: c.category,
         type: 'product',
         count: c._count.id,
       })),
-      ...serviceCategories.map((c) => ({
+      ...serviceCategories.map((c: any) => ({
         term: c.category,
         type: 'service',
         count: c._count.id,

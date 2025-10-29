@@ -13,6 +13,9 @@ export const comparePassword = async (
   return bcrypt.compare(password, hash);
 };
 
+// Alias for verifyPassword
+export const verifyPassword = comparePassword;
+
 export const validatePasswordStrength = (password: string): { valid: boolean; errors: string[] } => {
   const errors: string[] = [];
 

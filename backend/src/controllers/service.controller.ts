@@ -218,7 +218,7 @@ export const getServiceById = async (
     // Calculate average rating
     const avgRating =
       service.reviews.length > 0
-        ? service.reviews.reduce((sum, r) => sum + r.rating, 0) /
+        ? service.reviews.reduce((sum: number, r: { rating: number }) => sum + r.rating, 0) /
           service.reviews.length
         : 0;
 
@@ -228,7 +228,7 @@ export const getServiceById = async (
         where: { id },
         data: { viewCount: { increment: 1 } },
       })
-      .catch((err) => logger.error('Failed to increment view count', err));
+      .catch((err: any) => logger.error('Failed to increment view count', err));
 
     res.json({
       success: true,

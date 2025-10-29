@@ -6,6 +6,7 @@ const prisma = new PrismaClient({
 });
 
 export default prisma;
+export { prisma };
 
 // Graceful shutdown
 process.on('beforeExit', async () => {

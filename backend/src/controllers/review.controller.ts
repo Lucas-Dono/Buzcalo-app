@@ -69,16 +69,16 @@ export const getReviews = async (
 
     const avgRating =
       allReviews.length > 0
-        ? allReviews.reduce((sum, r) => sum + r.rating, 0) / allReviews.length
+        ? allReviews.reduce((sum: number, r: { rating: number }) => sum + r.rating, 0) / allReviews.length
         : 0;
 
     // Rating distribution (1-5 stars)
     const distribution = {
-      1: allReviews.filter((r) => r.rating === 1).length,
-      2: allReviews.filter((r) => r.rating === 2).length,
-      3: allReviews.filter((r) => r.rating === 3).length,
-      4: allReviews.filter((r) => r.rating === 4).length,
-      5: allReviews.filter((r) => r.rating === 5).length,
+      1: allReviews.filter((r: { rating: number }) => r.rating === 1).length,
+      2: allReviews.filter((r: { rating: number }) => r.rating === 2).length,
+      3: allReviews.filter((r: { rating: number }) => r.rating === 3).length,
+      4: allReviews.filter((r: { rating: number }) => r.rating === 4).length,
+      5: allReviews.filter((r: { rating: number }) => r.rating === 5).length,
     };
 
     res.json({

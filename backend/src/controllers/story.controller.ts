@@ -172,7 +172,7 @@ export const getStoryById = async (
         where: { id },
         data: { viewCount: { increment: 1 } },
       })
-      .catch((err) => logger.error('Failed to increment story view count', err));
+      .catch((err: any) => logger.error('Failed to increment story view count', err));
 
     res.json({
       success: true,

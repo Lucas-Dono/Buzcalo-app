@@ -105,10 +105,10 @@ export const getBusinesses = async (
     });
 
     // Calculate average rating for each business
-    const businessesWithRating = businesses.map((business) => {
+    const businessesWithRating = businesses.map((business: any) => {
       const avgRating =
         business.reviews.length > 0
-          ? business.reviews.reduce((sum, r) => sum + r.rating, 0) /
+          ? business.reviews.reduce((sum: number, r: { rating: number }) => sum + r.rating, 0) /
             business.reviews.length
           : 0;
 
@@ -227,7 +227,7 @@ export const getBusinessBySlug = async (
     // Calculate average rating
     const avgRating =
       business.reviews.length > 0
-        ? business.reviews.reduce((sum, r) => sum + r.rating, 0) /
+        ? business.reviews.reduce((sum: number, r: { rating: number }) => sum + r.rating, 0) /
           business.reviews.length
         : 0;
 
@@ -237,7 +237,7 @@ export const getBusinessBySlug = async (
         where: { id: business.id },
         data: { viewCount: { increment: 1 } },
       })
-      .catch((err) => logger.error('Failed to increment view count', err));
+      .catch((err: any) => logger.error('Failed to increment view count', err));
 
     res.json({
       success: true,

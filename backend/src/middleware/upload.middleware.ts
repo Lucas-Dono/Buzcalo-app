@@ -1,22 +1,20 @@
 import { Request, Response, NextFunction } from 'express';
 import multer from 'multer';
-import { v2 as cloudinary } from 'cloudinary';
-import { config } from '../config/env';
+import sharp from 'sharp';
+import fs from 'fs/promises';
+import path from 'path';
+import crypto from 'crypto';
 import { BadRequestError, InternalServerError } from '../utils/errors';
 import { logger } from '../utils/logger';
 
-// Configure Cloudinary
-cloudinary.config({
-  cloud_name: config.cloudinary.cloudName,
-  api_key: config.cloudinary.apiKey,
-  api_secret: config.cloudinary.apiSecret,
-});
+// Upload directory
+const UPLOAD_DIR = path.join(__dirname, '../../uploads');
 
 // Configure multer for memory storage
 const storage = multer.memoryStorage();
 
 const fileFilter = (
-  req: Request,
+  _req: Request,
   file: Express.Multer.File,
   cb: multer.FileFilterCallback
 ) => {
@@ -47,35 +45,64 @@ export const uploadSingle = upload.single('image');
 export const uploadMultiple = upload.array('images', 5);
 
 /**
- * Upload image to Cloudinary
+ * Optimize and save image locally
  */
-export const uploadToCloudinary = async (
+export const optimizeAndSaveImage = async (
   buffer: Buffer,
-  folder: string = 'buzcalo'
+  folder: string = 'general'
 ): Promise<string> => {
-  return new Promise((resolve, reject) => {
-    const uploadStream = cloudinary.uploader.upload_stream(
-      {
-        folder,
-        resource_type: 'image',
-        transformation: [
-          { width: 1200, height: 1200, crop: 'limit' },
-          { quality: 'auto' },
-          { fetch_format: 'auto' },
-        ],
-      },
-      (error, result) => {
-        if (error) {
-          logger.error('Cloudinary upload error:', error);
-          reject(new InternalServerError('Failed to upload image'));
-        } else {
-          resolve(result!.secure_url);
-        }
-      }
-    );
+  try {
+    // Generate unique filename
+    const filename = `${Date.now()}-${crypto.randomUUID()}.webp`;
+    const folderPath = path.join(UPLOAD_DIR, folder);
+    const filepath = path.join(folderPath, filename);
 
-    uploadStream.end(buffer);
-  });
+    // Ensure directory exists
+    await fs.mkdir(folderPath, { recursive: true });
+
+    // Optimize image: WebP with 80% quality, max 1200px
+    await sharp(buffer)
+      .resize(1200, 1200, {
+        fit: 'inside',
+        withoutEnlargement: true,
+      })
+      .webp({ quality: 80, effort: 6 })
+      .toFile(filepath);
+
+    // Return public URL path
+    return `/uploads/${folder}/${filename}`;
+  } catch (error) {
+    logger.error('Image optimization error:', error);
+    throw new InternalServerError('Failed to process image');
+  }
+};
+
+/**
+ * Generate thumbnail from image
+ */
+export const generateThumbnail = async (
+  buffer: Buffer,
+  folder: string = 'general'
+): Promise<string> => {
+  try {
+    const filename = `${Date.now()}-${crypto.randomUUID()}-thumb.webp`;
+    const folderPath = path.join(UPLOAD_DIR, folder);
+    const filepath = path.join(folderPath, filename);
+
+    // Ensure directory exists
+    await fs.mkdir(folderPath, { recursive: true });
+
+    // Create 300x300 thumbnail
+    await sharp(buffer)
+      .resize(300, 300, { fit: 'cover' })
+      .webp({ quality: 70, effort: 6 })
+      .toFile(filepath);
+
+    return `/uploads/${folder}/${filename}`;
+  } catch (error) {
+    logger.error('Thumbnail generation error:', error);
+    throw new InternalServerError('Failed to generate thumbnail');
+  }
 };
 
 /**
@@ -83,7 +110,7 @@ export const uploadToCloudinary = async (
  */
 export const processSingleImage = async (
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ): Promise<void> => {
   try {
@@ -91,7 +118,7 @@ export const processSingleImage = async (
       return next();
     }
 
-    const imageUrl = await uploadToCloudinary(req.file.buffer);
+    const imageUrl = await optimizeAndSaveImage(req.file.buffer);
     (req as any).imageUrl = imageUrl;
 
     next();
@@ -105,7 +132,7 @@ export const processSingleImage = async (
  */
 export const processMultipleImages = async (
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ): Promise<void> => {
   try {
@@ -114,7 +141,7 @@ export const processMultipleImages = async (
     }
 
     const uploadPromises = req.files.map((file) =>
-      uploadToCloudinary(file.buffer)
+      optimizeAndSaveImage(file.buffer)
     );
 
     const imageUrls = await Promise.all(uploadPromises);
@@ -127,25 +154,30 @@ export const processMultipleImages = async (
 };
 
 /**
- * Delete image from Cloudinary
+ * Delete image from local storage
  */
-export const deleteFromCloudinary = async (imageUrl: string): Promise<void> => {
+export const deleteLocalImage = async (imageUrl: string): Promise<void> => {
   try {
-    // Extract public_id from URL
-    const urlParts = imageUrl.split('/');
-    const fileName = urlParts[urlParts.length - 1];
-    const publicId = `buzcalo/${fileName.split('.')[0]}`;
+    // imageUrl format: /uploads/folder/filename.webp
+    const filepath = path.join(__dirname, '../..', imageUrl);
 
-    await cloudinary.uploader.destroy(publicId);
-    logger.info(`Deleted image from Cloudinary: ${publicId}`);
+    // Check if file exists before deleting
+    try {
+      await fs.access(filepath);
+      await fs.unlink(filepath);
+      logger.info(`Deleted image from local storage: ${imageUrl}`);
+    } catch (error) {
+      // File doesn't exist, ignore
+      logger.warn(`Image not found for deletion: ${imageUrl}`);
+    }
   } catch (error) {
-    logger.error('Failed to delete image from Cloudinary:', error);
+    logger.error('Failed to delete image from local storage:', error);
     // Don't throw error, just log it
   }
 };
 
 /**
- * Endpoint to upload images (can be used directly)
+ * Endpoint to upload single image
  */
 export const uploadImageEndpoint = async (
   req: Request,
@@ -157,7 +189,7 @@ export const uploadImageEndpoint = async (
       throw new BadRequestError('No image file provided');
     }
 
-    const imageUrl = await uploadToCloudinary(req.file.buffer);
+    const imageUrl = await optimizeAndSaveImage(req.file.buffer, 'general');
 
     res.json({
       success: true,
@@ -185,7 +217,7 @@ export const uploadImagesEndpoint = async (
     }
 
     const uploadPromises = req.files.map((file) =>
-      uploadToCloudinary(file.buffer)
+      optimizeAndSaveImage(file.buffer, 'general')
     );
 
     const imageUrls = await Promise.all(uploadPromises);
@@ -200,4 +232,18 @@ export const uploadImagesEndpoint = async (
   } catch (error) {
     next(error);
   }
+};
+
+/**
+ * Initialize upload directories
+ */
+export const initializeUploadDirectories = async (): Promise<void> => {
+  const folders = ['general', 'products', 'services', 'businesses', 'users', 'stories'];
+
+  for (const folder of folders) {
+    const folderPath = path.join(UPLOAD_DIR, folder);
+    await fs.mkdir(folderPath, { recursive: true });
+  }
+
+  logger.info('Upload directories initialized');
 };

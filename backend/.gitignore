@@ -43,3 +43,7 @@ coverage/
 *.tmp
 *.temp
 .cache/
+
+# Uploads (user-generated images)
+uploads/
+!uploads/.gitkeep

@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git init:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: BuZCalo - Plataforma de descubrimiento de productos locales\n\n- Rediseño completo de BizConnect a BuZCalo\n- Enfoque en descubrimiento de productos locales en ciudades pequeñas\n- Sistema de Stories para ofertas del día (desaparecen a las 23:59hs)\n- Páginas implementadas: Home, Search, Explore, Business, Favorites, Profile\n- Componentes: ProductCard, Stories, Header, Sidebar\n- Diseño optimizado para UX: banner compacto, productos visibles sin scroll\n- Perfil de negocio y usuario con layout mejorado\n- Color palette: Primary (azul), Secondary (naranja), Accent (teal)\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git remote add:*)",
+      "Bash(git branch:*)",
+      "Bash(git push:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nCambio de color secundario a amarillo dorado y nueva página \"Sobre Nosotros\"\n\n- Cambio de color secondary de naranja (#ff7700) a amarillo dorado (#F7B32B)\n- Referencia conceptual a las páginas amarillas de la guía telefónica\n- Logo actualizado: reemplazado cuadrado con \"B\" por imagen logo.png\n- Nueva página About.jsx con la historia y misión de BuZCalo\n- Comparación entre guía telefónica tradicional y BuZCalo digital\n- Sección agregada al Sidebar para acceder a \"Sobre Nosotros\"\n- El amarillo se usa estratégicamente en badges, ofertas y elementos de acento\n- Mantenida accesibilidad y legibilidad con fondos neutros\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git commit:*)",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(npx tsc --init)",
+      "Bash(npx prisma init:*)",
+      "Bash(tree:*)",
+      "Bash(chmod:*)",
+      "Bash(bash:*)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

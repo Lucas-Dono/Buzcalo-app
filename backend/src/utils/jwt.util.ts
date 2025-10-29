@@ -14,7 +14,7 @@ export const generateAccessToken = (payload: Omit<JWTPayload, 'type'>): string =
   return jwt.sign(
     { ...payload, type: 'access' },
     config.jwt.accessSecret,
-    { expiresIn: config.jwt.accessExpiresIn }
+    { expiresIn: config.jwt.accessExpiresIn as any }
   );
 };
 
@@ -22,7 +22,7 @@ export const generateRefreshToken = (payload: Omit<JWTPayload, 'type' | 'email' 
   return jwt.sign(
     { ...payload, type: 'refresh' },
     config.jwt.refreshSecret,
-    { expiresIn: config.jwt.refreshExpiresIn }
+    { expiresIn: config.jwt.refreshExpiresIn as any }
   );
 };
 
