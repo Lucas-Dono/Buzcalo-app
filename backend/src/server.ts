@@ -3,6 +3,7 @@ import { config } from './config/env';
 import logger from './utils/logger';
 import { connectRedis } from './config/redis';
 import prisma from './config/database';
+import { startAllJobs } from './jobs/storyExpiration.job';
 
 const startServer = async (): Promise<void> => {
   try {
@@ -13,6 +14,9 @@ const startServer = async (): Promise<void> => {
     // Test database connection
     await prisma.$connect();
     logger.info('Database connected successfully');
+
+    // Start cron jobs
+    startAllJobs();
 
     // Start server
     const server = app.listen(config.port, () => {

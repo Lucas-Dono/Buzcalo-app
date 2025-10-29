@@ -6,7 +6,7 @@ import { config } from './config/env';
 import { errorHandler, notFound } from './middleware/errorHandler.middleware';
 import { globalRateLimit } from './middleware/rateLimit.middleware';
 
-// Routes (will be imported later)
+// Routes
 import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
 import businessRoutes from './routes/business.routes';
@@ -18,6 +18,7 @@ import reviewRoutes from './routes/review.routes';
 import cityRoutes from './routes/city.routes';
 import subscriptionRoutes from './routes/subscription.routes';
 import searchRoutes from './routes/search.routes';
+import uploadRoutes from './routes/upload.routes';
 
 const app: Application = express();
 
@@ -63,6 +64,7 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/cities', cityRoutes);
 app.use('/api/subscriptions', subscriptionRoutes);
 app.use('/api/search', searchRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // 404 handler
 app.use(notFound);

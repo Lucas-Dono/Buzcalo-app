@@ -102,48 +102,77 @@ Después de ejecutar `npm run prisma:seed`:
 ### Usuarios
 - `GET /api/users/me` - Ver perfil
 - `PATCH /api/users/me` - Actualizar perfil
+- `GET /api/users/me/stats` - Ver estadísticas del usuario
+- `PUT /api/users/me/password` - Cambiar contraseña
+- `PUT /api/users/me/email` - Actualizar email
+- `DELETE /api/users/me` - Eliminar cuenta
 
 ### Negocios
-- `GET /api/businesses` - Listar negocios
-- `GET /api/businesses/:id` - Ver negocio
+- `GET /api/businesses` - Listar negocios (con filtros)
+- `GET /api/businesses/me` - Ver mi negocio
+- `GET /api/businesses/:slug` - Ver negocio por slug
 - `POST /api/businesses` - Crear negocio
 - `PATCH /api/businesses/:id` - Actualizar negocio
+- `DELETE /api/businesses/:id` - Eliminar negocio
 
 ### Productos
-- `GET /api/products` - Listar productos
+- `GET /api/products` - Listar productos (con filtros)
+- `GET /api/products/me` - Ver mis productos
 - `GET /api/products/:id` - Ver producto
 - `POST /api/products` - Crear producto
 - `PATCH /api/products/:id` - Actualizar producto
+- `DELETE /api/products/:id` - Eliminar producto
 
 ### Servicios
-- `GET /api/services` - Listar servicios
+- `GET /api/services` - Listar servicios (con filtros)
+- `GET /api/services/me` - Ver mis servicios
 - `GET /api/services/:id` - Ver servicio
 - `POST /api/services` - Crear servicio
 - `PATCH /api/services/:id` - Actualizar servicio
+- `DELETE /api/services/:id` - Eliminar servicio
 
 ### Stories
 - `GET /api/stories` - Listar stories activas
-- `POST /api/stories` - Crear story
+- `GET /api/stories/me` - Ver mis stories
+- `GET /api/stories/:id` - Ver story
+- `GET /api/stories/:id/stats` - Ver estadísticas de story
+- `POST /api/stories` - Crear story (max 5/día)
+- `POST /api/stories/:id/click` - Registrar click en story
 - `DELETE /api/stories/:id` - Eliminar story
 
 ### Favoritos
 - `GET /api/favorites` - Mis favoritos
+- `GET /api/favorites/check` - Verificar si es favorito
 - `POST /api/favorites` - Agregar favorito
 - `DELETE /api/favorites/:id` - Quitar favorito
 
 ### Reviews
-- `GET /api/reviews` - Listar reviews
+- `GET /api/reviews` - Listar reviews (requiere businessId, productId o serviceId)
+- `GET /api/reviews/me` - Mis reviews
 - `POST /api/reviews` - Crear review
+- `PATCH /api/reviews/:id` - Actualizar review
+- `DELETE /api/reviews/:id` - Eliminar review
 
 ### Suscripciones
 - `GET /api/subscriptions/me` - Ver plan actual
+- `GET /api/subscriptions/history` - Ver historial de suscripciones
 - `POST /api/subscriptions/subscribe` - Suscribirse a Plan Partner
+- `POST /api/subscriptions/cancel` - Cancelar suscripción
+- `POST /api/subscriptions/webhook/mercadopago` - Webhook MercadoPago
 
 ### Búsqueda
 - `GET /api/search?q=...` - Búsqueda global
+- `GET /api/search/suggestions?q=...` - Sugerencias de búsqueda
+- `GET /api/search/popular` - Búsquedas populares
 
 ### Ciudades
 - `GET /api/cities` - Listar ciudades activas
+- `GET /api/cities/:id` - Ver ciudad
+- `GET /api/cities/:id/stats` - Ver estadísticas de ciudad
+
+### Uploads
+- `POST /api/upload/image` - Subir imagen única
+- `POST /api/upload/images` - Subir múltiples imágenes (max 5)
 
 ## 🗄️ Estructura del proyecto
 
