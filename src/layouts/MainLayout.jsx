@@ -8,7 +8,10 @@ function MainLayout({ children, currentPage, setCurrentPage }) {
 
   return (
     <div className="min-h-screen bg-neutral-50">
-      <Header onMenuToggle={() => setShowMobileMenu(!showMobileMenu)} />
+      <Header
+        onMenuToggle={() => setShowMobileMenu(!showMobileMenu)}
+        setCurrentPage={setCurrentPage}
+      />
 
       <div className="flex">
         <Sidebar

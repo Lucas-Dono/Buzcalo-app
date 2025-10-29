@@ -2,11 +2,13 @@ import { useState } from 'react'
 import MainLayout from './layouts/MainLayout'
 import Home from './pages/Home'
 import Search from './pages/Search'
+import Services from './pages/Services'
 import Explore from './pages/Explore'
 import Business from './pages/Business'
 import Favorites from './pages/Favorites'
 import Profile from './pages/Profile'
 import About from './pages/About'
+import Register from './pages/Register'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -17,6 +19,8 @@ function App() {
         return <Home />
       case 'search':
         return <Search />
+      case 'services':
+        return <Services />
       case 'explore':
         return <Explore />
       case 'business':
@@ -27,6 +31,8 @@ function App() {
         return <Profile />
       case 'about':
         return <About />
+      case 'register':
+        return <Register />
       default:
         return <Home />
     }
