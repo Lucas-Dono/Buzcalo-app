@@ -21,7 +21,7 @@ function Header({ onMenuToggle }) {
               <span className="text-white font-bold text-xl">B</span>
             </div>
             <h1 className="text-2xl font-bold text-neutral-800">
-              BuZ<span className="text-primary-500">Calo</span>
+              BúZ<span className="text-primary-500">Calo</span>
             </h1>
           </div>
         </div>

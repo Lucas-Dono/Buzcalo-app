@@ -79,7 +79,7 @@ function Suggestions() {
           <span>•</span>
           <a href="#" className="hover:text-primary-600">Condiciones</a>
         </div>
-        <p className="text-neutral-400">BuZCalo © 2025</p>
+        <p className="text-neutral-400">BúZCalo © 2025</p>
       </div>
     </div>
   );
