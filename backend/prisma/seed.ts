@@ -25,7 +25,7 @@ async function main() {
   // Create test user (Cliente)
   const hashedPassword = await hashPassword('Test1234');
 
-  const testUser = await prisma.user.upsert({
+  await prisma.user.upsert({
     where: { email: 'cliente@test.com' },
     update: {},
     create: {
