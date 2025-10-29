@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
+import BottomNav from '../components/BottomNav';
 
 function MainLayout({ children, currentPage, setCurrentPage }) {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -17,12 +18,15 @@ function MainLayout({ children, currentPage, setCurrentPage }) {
           setCurrentPage={setCurrentPage}
         />
 
-        <main className="flex-1 ml-0 md:ml-64 pt-16">
+        <main className="flex-1 ml-0 md:ml-64 pt-16 pb-16 md:pb-6">
           <div className="max-w-4xl mx-auto px-4 py-6">
             {children}
           </div>
         </main>
       </div>
+
+      {/* Bottom Navigation for Mobile */}
+      <BottomNav currentPage={currentPage} setCurrentPage={setCurrentPage} />
     </div>
   );
 }

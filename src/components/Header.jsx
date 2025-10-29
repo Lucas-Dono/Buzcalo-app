@@ -22,7 +22,7 @@ function Header({ onMenuToggle }) {
               alt="BuZCalo"
               className="w-9 h-9 object-contain"
             />
-            <h1 className="text-2xl font-bold text-neutral-800">
+            <h1 className="text-xl md:text-2xl font-bold text-neutral-800 hidden sm:block">
               BúZ<span className="text-primary-500">Calo</span>
             </h1>
           </div>
@@ -64,13 +64,13 @@ function Header({ onMenuToggle }) {
         </div>
 
         {/* Action Icons */}
-        <div className="flex items-center gap-2">
-          <button className="p-2 hover:bg-neutral-100 rounded-lg text-neutral-700" title="Favoritos">
+        <div className="flex items-center gap-1 md:gap-2">
+          <button className="p-2 hover:bg-neutral-100 rounded-lg text-neutral-700 hidden md:flex" title="Favoritos">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
           </button>
-          <button className="w-9 h-9 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center text-white font-semibold hover:shadow-lg transition-shadow">
+          <button className="w-8 h-8 md:w-9 md:h-9 bg-gradient-to-br from-primary-500 to-accent-500 rounded-full flex items-center justify-center text-white text-sm md:text-base font-semibold hover:shadow-lg transition-shadow">
             U
           </button>
         </div>
