@@ -17,9 +17,11 @@ function Header({ onMenuToggle }) {
             </svg>
           </button>
           <div className="flex items-center gap-2">
-            <div className="w-9 h-9 bg-gradient-to-br from-primary-500 to-secondary-500 rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-xl">B</span>
-            </div>
+            <img
+              src="/logo.png"
+              alt="BuZCalo"
+              className="w-9 h-9 object-contain"
+            />
             <h1 className="text-2xl font-bold text-neutral-800">
               BúZ<span className="text-primary-500">Calo</span>
             </h1>

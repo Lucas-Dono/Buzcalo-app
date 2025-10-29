@@ -6,6 +6,7 @@ function Sidebar({ showMobile, onClose, currentPage, setCurrentPage }) {
     { icon: 'business', label: 'Mi Negocio', page: 'business' },
     { icon: 'favorites', label: 'Favoritos', page: 'favorites' },
     { icon: 'profile', label: 'Mi Perfil', page: 'profile' },
+    { icon: 'about', label: 'Sobre Nosotros', page: 'about' },
   ];
 
   const handleNavigate = (page) => {
@@ -31,6 +32,9 @@ function Sidebar({ showMobile, onClose, currentPage, setCurrentPage }) {
     ),
     profile: (
       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+    ),
+    about: (
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
     ),
   };
 

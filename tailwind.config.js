@@ -21,16 +21,16 @@ export default {
           900: '#001433',
         },
         secondary: {
-          50: '#fff4e6',
-          100: '#ffd9b3',
-          200: '#ffbf80',
-          300: '#ffa64d',
-          400: '#ff8c1a',
-          500: '#ff7700', // Naranja energético - creatividad y conexión
-          600: '#cc5f00',
-          700: '#994700',
-          800: '#663000',
-          900: '#331800',
+          50: '#fffbeb',
+          100: '#fef3c7',
+          200: '#fde68a',
+          300: '#fcd34d',
+          400: '#fbbf24',
+          500: '#F7B32B', // Amarillo dorado - referencia a la Guía Amarilla
+          600: '#d97706',
+          700: '#b45309',
+          800: '#92400e',
+          900: '#78350f',
         },
         accent: {
           50: '#e6f9f7',

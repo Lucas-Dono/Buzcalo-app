@@ -6,6 +6,7 @@ import Explore from './pages/Explore'
 import Business from './pages/Business'
 import Favorites from './pages/Favorites'
 import Profile from './pages/Profile'
+import About from './pages/About'
 
 function App() {
   const [currentPage, setCurrentPage] = useState('home')
@@ -24,6 +25,8 @@ function App() {
         return <Favorites />
       case 'profile':
         return <Profile />
+      case 'about':
+        return <About />
       default:
         return <Home />
     }
