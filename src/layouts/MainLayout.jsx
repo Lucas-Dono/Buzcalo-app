@@ -18,8 +18,8 @@ function MainLayout({ children, currentPage, setCurrentPage }) {
           setCurrentPage={setCurrentPage}
         />
 
-        <main className="flex-1 ml-0 md:ml-64 pt-16 pb-16 md:pb-6">
-          <div className="max-w-4xl mx-auto px-4 py-6">
+        <main className="flex-1 ml-0 md:ml-64 pt-16 pb-16 md:pb-6 w-full overflow-x-hidden">
+          <div className="max-w-4xl mx-auto px-4 py-6 w-full">
             {children}
           </div>
         </main>

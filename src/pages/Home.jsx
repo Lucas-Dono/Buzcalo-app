@@ -122,24 +122,24 @@ function Home() {
     : products.filter(p => p.category === selectedCategory);
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 md:space-y-4">
       {/* Stories - Ofertas del día */}
       <Stories />
 
       {/* Categories */}
-      <div className="bg-white border border-neutral-200 rounded-lg shadow-sm p-3">
-        <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
+      <div className="bg-white border border-neutral-200 rounded-lg shadow-sm p-2 md:p-3">
+        <div className="flex gap-1.5 md:gap-2 overflow-x-auto pb-1 scrollbar-hide">
           {categories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => setSelectedCategory(cat.id)}
-              className={`px-4 py-2 rounded-full text-sm font-semibold whitespace-nowrap flex items-center gap-2 transition-all ${
+              className={`px-3 md:px-4 py-1.5 md:py-2 rounded-full text-xs md:text-sm font-semibold whitespace-nowrap flex items-center gap-1.5 md:gap-2 transition-all ${
                 selectedCategory === cat.id
                   ? 'bg-primary-600 text-white shadow-md'
                   : 'bg-neutral-100 text-neutral-700 hover:bg-neutral-200'
               }`}
             >
-              <span>{cat.icon}</span>
+              <span className="text-sm md:text-base">{cat.icon}</span>
               <span>{cat.name}</span>
             </button>
           ))}
@@ -148,11 +148,11 @@ function Home() {
 
       {/* Products Grid */}
       <div>
-        <div className="flex items-center justify-between mb-3">
-          <h2 className="text-lg font-bold text-neutral-800">
+        <div className="flex items-center justify-between mb-2 md:mb-3">
+          <h2 className="text-base md:text-lg font-bold text-neutral-800">
             Productos cerca de ti ({filteredProducts.length})
           </h2>
-          <select className="px-3 py-2 border border-neutral-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 font-medium text-neutral-700">
+          <select className="px-2 md:px-3 py-1.5 md:py-2 border border-neutral-300 rounded-lg text-xs md:text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 font-medium text-neutral-700">
             <option>Más cercanos</option>
             <option>Menor precio</option>
             <option>Mayor precio</option>
@@ -160,7 +160,7 @@ function Home() {
           </select>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4">
           {filteredProducts.map((product) => (
             <ProductCard key={product.id} product={product} />
           ))}

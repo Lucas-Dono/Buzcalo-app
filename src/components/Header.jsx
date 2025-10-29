@@ -4,8 +4,8 @@ function Header({ onMenuToggle }) {
   const [searchQuery, setSearchQuery] = useState('');
 
   return (
-    <header className="fixed top-0 left-0 right-0 bg-white border-b border-neutral-200 shadow-sm z-50">
-      <div className="max-w-screen-xl mx-auto px-4 h-16 flex items-center justify-between">
+    <header className="fixed top-0 left-0 right-0 bg-white border-b border-neutral-200 shadow-sm z-50 w-full">
+      <div className="w-full mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center gap-4">
           <button
@@ -20,9 +20,9 @@ function Header({ onMenuToggle }) {
             <img
               src="/logo.png"
               alt="BuZCalo"
-              className="w-9 h-9 object-contain"
+              className="w-8 h-8 md:w-9 md:h-9 object-contain"
             />
-            <h1 className="text-xl md:text-2xl font-bold text-neutral-800 hidden sm:block">
+            <h1 className="text-lg md:text-2xl font-bold text-neutral-800">
               BúZ<span className="text-primary-500">Calo</span>
             </h1>
           </div>

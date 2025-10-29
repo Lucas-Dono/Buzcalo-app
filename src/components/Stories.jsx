@@ -75,52 +75,52 @@ function Stories() {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-white to-neutral-50 border border-neutral-200 rounded-2xl shadow-md p-5 mb-6">
-      <div className="flex items-center justify-between mb-4">
+    <div className="bg-gradient-to-br from-white to-neutral-50 border border-neutral-200 rounded-2xl shadow-md p-3 md:p-5 mb-4 md:mb-6">
+      <div className="flex items-center justify-between mb-2 md:mb-4">
         <div className="flex items-center gap-2">
-          <span className="text-2xl">🔥</span>
-          <h2 className="text-base font-bold text-neutral-800">
+          <span className="text-xl md:text-2xl">🔥</span>
+          <h2 className="text-sm md:text-base font-bold text-neutral-800">
             Ofertas y Productos del Día
           </h2>
         </div>
-        <span className="text-xs font-medium text-neutral-500 bg-neutral-100 px-3 py-1 rounded-full">
+        <span className="text-[10px] md:text-xs font-medium text-neutral-500 bg-neutral-100 px-2 md:px-3 py-1 rounded-full">
           Disponibles hoy
         </span>
       </div>
 
-      <div className="flex gap-3 overflow-x-auto scrollbar-hide py-3 -mx-1 px-1">
+      <div className="flex gap-2 md:gap-3 overflow-x-auto scrollbar-hide py-2 md:py-3 -mx-1 px-1">
         {stories.map((story) => (
-          <div key={story.id} className="flex flex-col items-center gap-2.5 flex-shrink-0 pt-3">
+          <div key={story.id} className="flex flex-col items-center gap-1.5 md:gap-2.5 flex-shrink-0 pt-2 md:pt-3">
             <div className="relative group">
               {/* Ring animado para nuevas ofertas */}
               {story.hasNew && (
-                <div className="absolute -inset-1 bg-gradient-to-r from-secondary-400 via-secondary-500 to-secondary-600 rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
+                <div className="absolute -inset-0.5 md:-inset-1 bg-gradient-to-r from-secondary-400 via-secondary-500 to-secondary-600 rounded-xl md:rounded-2xl blur opacity-75 group-hover:opacity-100 transition duration-300 animate-pulse"></div>
               )}
 
               {/* Badge de oferta/tipo - MOVIDO ARRIBA DEL CONTENEDOR */}
               {story.badge && (
-                <div className={`absolute -top-3 left-1/2 -translate-x-1/2 ${story.badgeColor} text-white px-2.5 py-1 rounded-full text-[10px] font-extrabold shadow-xl border-2 border-white uppercase tracking-wide z-10`}>
+                <div className={`absolute -top-2 md:-top-3 left-1/2 -translate-x-1/2 ${story.badgeColor} text-white px-1.5 md:px-2.5 py-0.5 md:py-1 rounded-full text-[8px] md:text-[10px] font-extrabold shadow-xl border-2 border-white uppercase tracking-wide z-10`}>
                   {story.badge}
                 </div>
               )}
 
               <div
-                className={`relative w-[88px] h-[88px] rounded-2xl ${
+                className={`relative w-[70px] h-[70px] md:w-[88px] md:h-[88px] rounded-xl md:rounded-2xl ${
                   story.gradient !== 'from-neutral-400 to-neutral-500'
                     ? `bg-gradient-to-br ${story.gradient}`
                     : 'bg-neutral-200'
                 } p-1 cursor-pointer transform transition-all duration-300 hover:scale-110 hover:rotate-2 shadow-lg hover:shadow-xl`}
               >
                 {/* Contenido interno */}
-                <div className="w-full h-full rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
-                  <div className="text-white font-bold text-2xl drop-shadow-lg">
+                <div className="w-full h-full rounded-lg md:rounded-xl bg-white/10 backdrop-blur-sm flex items-center justify-center">
+                  <div className="text-white font-bold text-lg md:text-2xl drop-shadow-lg">
                     {story.avatar}
                   </div>
                 </div>
 
                 {/* Botón de crear */}
                 {story.isAdd && (
-                  <div className="absolute -bottom-2 -right-2 w-8 h-8 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center text-white border-3 border-white shadow-xl transform hover:scale-110 transition-transform">
+                  <div className="absolute -bottom-1.5 md:-bottom-2 -right-1.5 md:-right-2 w-6 h-6 md:w-8 md:h-8 bg-gradient-to-br from-primary-500 to-primary-600 rounded-full flex items-center justify-center text-white border-3 border-white shadow-xl transform hover:scale-110 transition-transform">
                     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={3}>
                       <path strokeLinecap="round" strokeLinejoin="round" d="M12 4v16m8-8H4" />
                     </svg>
